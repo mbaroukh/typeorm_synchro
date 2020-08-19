@@ -22,8 +22,11 @@ const main = async () => {
     port: 3306,
     synchronize: false,
   } as ConnectionOptions;
-
-  const connectionOptions = connectionOptionsSqlite;
+  console.log("process.argv:", process.argv);
+  const connectionOptions =
+    process.argv.length > 2 && process.argv[2] === "mysql"
+      ? connectionOptionsMysql
+      : connectionOptionsSqlite;
 
   await step1(connectionOptions);
   await step2(connectionOptions);
